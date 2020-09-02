@@ -7,7 +7,7 @@ const StyledDiv = ({style}) => {
 
 const Ball = ({w, h, scale}) => {
     const {ballStyle} = useStyle(w, h, scale)
-    return <StyledDiv style = {ballStyle}>
+    return <StyledDiv style = {ballStyle()}>
     </StyledDiv>
 }
 
@@ -19,7 +19,7 @@ const Line = ({i, w, h, scale}) => {
 
 const BallLineOutLine = ({w, h, scale, onClick}) => {
     const {parentStyle} = useStyle(w, h, scale)
-    return <div onClick = {onClick} style = {parentStyle}>
+    return <div onClick = {onClick} style = {parentStyle()}>
         <Ball w = {w} h = {h} scale = {scale}/>
         {[0, 1].map(i => (<Line i = {i} key = {`line_${i}`} w = {w} h = {h} scale = {scale}/>))}
     </div>

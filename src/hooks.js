@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 import {divideScale, sinify} from './utils'
 
 export const useAnimatedScale = (scGap = 0.02, delay = 20) => {
-    const [scale, setScale] = useState(0.02)
+    const [scale, setScale] = useState(0)
     const [animated, setAnimated] = useState(false)
     return {
         scale, 
@@ -47,9 +47,9 @@ export const useDimension = () => {
 
 export const useStyle = (w, h, scale) => {
     const sf = sinify(scale)
-    const sf1 = divideScale(sf, 0, 2)
-    const sf2 = divideScale(sf, 1, 2)
-    const position = 'absoulte'
+    const sf1 = divideScale(sf, 0, 3)
+    const sf2 = divideScale(sf, 1, 3)
+    const position = 'absolute'
     const background = 'indigo'
     const r = Math.min(w, h) / 10
     return {
@@ -65,15 +65,16 @@ export const useStyle = (w, h, scale) => {
             const left = `${-r}px`
             const width = `${2 * r}px`
             const height = `${2 * r}px`
-            return {top, left, position, width, height, background}            
+            const borderRadius = '50%'
+            return {top, left, position, width, height, background, borderRadius}            
         },
 
         lineStyle(i) {
-            const top = `${-r}px`
-            const left = `${-r + 2 * r * i}px`
-            const width = `${2 * r}px`
+            const top = `${-r + 2 * r * i}px`
+            const left = `${-2 * r * sf1}px`
+            const width = `${4 * r * sf1}px`
             const height = `${r / 10}px`
-            return {poisition, width, height, left, top, background}
+            return {position, width, height, left, top, background}
         }
     }
 }
